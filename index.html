@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A premium experience crafted for those who demand excellence. Discover what sets us apart." />
+    <meta name="theme-color" content="#030303" />
+
+    <!-- Preconnect for Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,300..800&display=swap" rel="stylesheet" />
+
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <title>TRUBOY — Premium Experience</title>
+  </head>
+  <body>
+
+    <!-- ===== HERO — Scroll-driven canvas animation ===== -->
+    <section class="hero" id="hero">
+      <div class="hero__sticky">
+        
+        <!-- Scroll down indicator -->
+        <div class="hero-scroll-indicator" id="scrollIndicator">
+          <span class="hero-scroll-indicator__text">Scroll Down</span>
+          <svg class="hero-scroll-indicator__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </div>
+
+        <!-- Canvas for frame animation -->
+        <canvas class="hero__canvas" id="heroCanvas"></canvas>
+
+        <!-- ===== INTERACTIVE HOVER OVERLAY (appears after scroll animation ends) ===== -->
+        <div class="hero-overlay-interactive" id="heroOverlayInteractive">
+          <!-- Base image — permanently locked at full opacity -->
+          <img
+            src="/assets/interior-base.jpg"
+            alt="Truboy BBQ Interior"
+            class="hero-overlay-interactive__img hero-overlay-interactive__img--base"
+            id="imgBase"
+            draggable="false"
+          />
+          <!-- Highlight images — crossfade on hover -->
+          <img
+            src="/assets/interior-meat.jpg"
+            alt="Truboy Meat Market"
+            class="hero-overlay-interactive__img hero-overlay-interactive__img--highlight"
+            id="imgMeat"
+            draggable="false"
+          />
+          <img
+            src="/assets/interior-catering.jpg"
+            alt="Truboy Catering"
+            class="hero-overlay-interactive__img hero-overlay-interactive__img--highlight"
+            id="imgCatering"
+            draggable="false"
+          />
+          <img
+            src="/assets/interior-restaurant.jpg"
+            alt="Truboy Restaurant"
+            class="hero-overlay-interactive__img hero-overlay-interactive__img--highlight"
+            id="imgRestaurant"
+            draggable="false"
+          />
+
+          <!-- 3-column invisible hover/link grid -->
+          <div class="hero-overlay-interactive__grid" id="hoverGrid">
+            <a
+              href="/meat-market"
+              class="hero-overlay-interactive__zone"
+              id="zoneMeat"
+              data-section="meat"
+              aria-label="Explore Meat Market"
+            >
+              <div class="hero-overlay-interactive__content">
+                <h3 class="hero-overlay-interactive__title">Meat Market</h3>
+                <p class="hero-overlay-interactive__blurb">
+                  Bring the smokehouse home. Stock up on premium, 100% Zabiha Halal cuts. From high-grade Black Angus briskets and beef ribs to signature smoked BBQ sausages, discover the ultimate selection of championship-quality meats ready for your grill or smoker.
+                </p>
+              </div>
+            </a>
+            <a
+              href="/catering"
+              class="hero-overlay-interactive__zone"
+              id="zoneCatering"
+              data-section="catering"
+              aria-label="Explore Catering"
+            >
+              <div class="hero-overlay-interactive__content">
+                <h3 class="hero-overlay-interactive__title">Catering</h3>
+                <p class="hero-overlay-interactive__blurb">
+                  Feed the crowd with authentic Texas warmth. Whether you are planning a corporate event, family gathering, or a holiday feast, our catering service delivers massive, ready-to-serve trays of legendary smoked meats and classic Southern sides straight to your venue.
+                </p>
+              </div>
+            </a>
+            <a
+              href="/restaurant"
+              class="hero-overlay-interactive__zone"
+              id="zoneRestaurant"
+              data-section="restaurant"
+              aria-label="Explore Restaurant"
+            >
+              <div class="hero-overlay-interactive__content">
+                <h3 class="hero-overlay-interactive__title">Restaurant</h3>
+                <p class="hero-overlay-interactive__blurb">
+                  Pull up a chair at the pit. Visit our Missouri City restaurant to experience the true flavor of authentic Texas barbecue. Enjoy juicy brisket, massive tender beef ribs, and smokehouse favorites served fresh, hot, and straight to your plate in a welcoming atmosphere.
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

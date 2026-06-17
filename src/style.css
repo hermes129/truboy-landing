@@ -1,0 +1,671 @@
+@import "tailwindcss";
+
+/* ============================================
+   DESIGN SYSTEM — Tailwind CSS v4 Theme
+   ============================================ */
+
+@theme {
+  /* Color Palette — Deep luxury dark theme */
+  --color-void: #030303;
+  --color-obsidian: #0a0a0a;
+  --color-carbon: #111111;
+  --color-graphite: #1a1a1a;
+  --color-smoke: #2a2a2a;
+  --color-ash: #404040;
+  --color-silver: #8a8a8a;
+  --color-pearl: #c0c0c0;
+  --color-ivory: #e8e8e8;
+  --color-snow: #f5f5f5;
+  --color-white: #ffffff;
+
+  /* Accent — warm gold / amber thread */
+  --color-accent: #c8a55c;
+  --color-accent-light: #dfc07a;
+  --color-accent-dim: #9a7d3a;
+  --color-accent-glow: rgba(200, 165, 92, 0.15);
+
+  /* Typography — refined scale */
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Spacing — generous whitespace rhythm */
+  --spacing-section: 8rem;
+  --spacing-block: 4rem;
+  --spacing-element: 2rem;
+
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-decel: cubic-bezier(0, 0, 0.2, 1);
+
+  /* Shadows */
+  --shadow-glow: 0 0 40px rgba(200, 165, 92, 0.08);
+  --shadow-elevated: 0 24px 64px rgba(0, 0, 0, 0.4);
+  --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   BASE / RESET
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-void);
+  color: var(--color-ivory);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-void);
+}
+
+/* ============================================
+   SCROLLBAR — ultra-minimal
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-smoke);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ash);
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.5rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.5s var(--ease-smooth);
+  backdrop-filter: blur(0px);
+  background: transparent;
+}
+
+.nav--scrolled {
+  padding: 1rem 3rem;
+  backdrop-filter: blur(20px) saturate(1.2);
+  background: rgba(3, 3, 3, 0.72);
+  border-bottom: 1px solid rgba(200, 165, 92, 0.06);
+}
+
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  text-decoration: none;
+  transition: color 0.3s var(--ease-smooth);
+}
+
+.nav__logo span {
+  color: var(--color-accent);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav__link {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-silver);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s var(--ease-smooth);
+  padding: 0.25rem 0;
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width 0.4s var(--ease-smooth);
+}
+
+.nav__link:hover {
+  color: var(--color-white);
+}
+
+.nav__link:hover::after {
+  width: 100%;
+}
+
+.nav__cta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-void);
+  background: var(--color-accent);
+  padding: 0.65rem 1.8rem;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.35s var(--ease-smooth);
+}
+
+.nav__cta:hover {
+  background: var(--color-accent-light);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   HERO — Full viewport canvas section
+   ============================================ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 300vh; /* Scroll height: trackpad space for the animation */
+}
+
+.hero__sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay gradient for text legibility */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(3, 3, 3, 0.3) 0%,
+    rgba(3, 3, 3, 0) 30%,
+    rgba(3, 3, 3, 0) 60%,
+    rgba(3, 3, 3, 0.6) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 56rem;
+  padding: 0 2rem;
+  opacity: 1;
+  transition: opacity 0.6s var(--ease-smooth);
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: var(--color-accent-glow);
+  border: 1px solid rgba(200, 165, 92, 0.15);
+  padding: 0.5rem 1.25rem;
+  border-radius: 100px;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(8px);
+}
+
+.hero__badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  margin-bottom: 1.5rem;
+}
+
+.hero__title-accent {
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+.hero__subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-weight: 400;
+  color: var(--color-silver);
+  line-height: 1.7;
+  max-width: 38rem;
+  margin: 0 auto 2.5rem;
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-void);
+  background: var(--color-accent);
+  padding: 0.9rem 2.2rem;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.35s var(--ease-smooth);
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-light);
+  box-shadow: 0 0 30px rgba(200, 165, 92, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-pearl);
+  background: transparent;
+  padding: 0.9rem 2.2rem;
+  border: 1px solid var(--color-smoke);
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.35s var(--ease-smooth);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-accent-dim);
+  color: var(--color-white);
+  background: rgba(200, 165, 92, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Scroll indicator */
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0.5;
+  transition: opacity 0.4s var(--ease-smooth);
+  animation: fade-in-up 1.5s var(--ease-decel) 1.5s both;
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 20;
+  opacity: 1;
+  transition: opacity 0.5s var(--ease-smooth);
+  pointer-events: none;
+}
+
+.hero-scroll-indicator--hidden {
+  opacity: 0;
+}
+
+.hero-scroll-indicator__text {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.hero-scroll-indicator__arrow {
+  color: var(--color-white);
+  animation: bounce-down 2s infinite ease-in-out;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
+}
+
+@keyframes bounce-down {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* ============================================
+   INTERACTIVE HOVER OVERLAY
+   Appears after scroll animation reaches 100%.
+   Base image is permanently locked at full
+   opacity as a solid background. Highlight
+   images stack on top and crossfade.
+   ============================================ */
+
+.hero-overlay-interactive {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s var(--ease-smooth);
+}
+
+.hero-overlay-interactive--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Shared image layer — GPU-composited, cover-fit */
+.hero-overlay-interactive__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+
+  /* GPU compositing — eliminates transition blur */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  will-change: opacity;
+}
+
+/* BASE image — permanently locked at full opacity.
+   Sits at z-index:1, never transitions, never fades. */
+.hero-overlay-interactive__img--base {
+  z-index: 1;
+  opacity: 1;
+}
+
+/* HIGHLIGHT images — sit above base at z-index:2.
+   Default opacity-0, fade to 1 when hovered. */
+.hero-overlay-interactive__img--highlight {
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+/* Active highlight — shown on hover */
+.hero-overlay-interactive__img--highlight-active {
+  opacity: 1;
+}
+
+/* 3-column invisible link grid — highest z to
+   prevent images from intercepting the pointer */
+.hero-overlay-interactive__grid {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Individual hover zone */
+.hero-overlay-interactive__zone {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 3.5rem;
+  text-decoration: none;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: background 0.4s var(--ease-smooth);
+}
+
+.hero-overlay-interactive__zone:hover {
+  background: linear-gradient(
+    to top,
+    rgba(234, 88, 12, 0.95) 0%,
+    rgba(234, 88, 12, 0.8) 15%,
+    rgba(234, 88, 12, 0.2) 40%,
+    transparent 60%
+  );
+}
+
+/* Divider lines between zones */
+.hero-overlay-interactive__zone:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Content wrapper — hidden by default, slides up on hover */
+.hero-overlay-interactive__content {
+  text-align: center;
+  padding: 0 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s var(--ease-smooth), transform 0.4s var(--ease-smooth);
+}
+
+.hero-overlay-interactive__zone:hover .hero-overlay-interactive__content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Large Heading */
+.hero-overlay-interactive__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4vw, 4.5rem);
+  font-weight: 800; /* Extra bold */
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  line-height: 1;
+  margin-bottom: 1.25rem;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Small Blurb */
+.hero-overlay-interactive__blurb {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   PROGRESS INDICATOR (thin bar at top)
+   ============================================ */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent-dim), var(--color-accent), var(--color-accent-light));
+  z-index: 200;
+  transition: width 0.05s linear;
+}
+
+/* ============================================
+   CONTENT SECTIONS (below hero)
+   ============================================ */
+
+.section {
+  position: relative;
+  padding: var(--spacing-section) 3rem;
+}
+
+.section__inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+  margin-bottom: 1.25rem;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--color-silver);
+  line-height: 1.7;
+  max-width: 36rem;
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px) translateX(-50%);
+  }
+  to {
+    opacity: 0.5;
+    transform: translateY(0) translateX(-50%);
+  }
+}
+
+/* Reveal animation for sections */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-decel), transform 0.8s var(--ease-decel);
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 1rem 1.5rem;
+  }
+
+  .nav__links {
+    display: none; /* Mobile menu toggle would go here */
+  }
+
+  .hero__content {
+    padding: 0 1.25rem;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+  }
+
+  .section {
+    padding: 4rem 1.5rem;
+  }
+}
