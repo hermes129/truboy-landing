@@ -7,7 +7,7 @@ import './style.css';
 
 // --- Configuration ---
 const FRAME_COUNT = 121;
-const FRAME_PATH  = '/assets/scroll-frames/';
+const FRAME_PATH  = `${import.meta.env.BASE_URL}assets/scroll-frames/`;
 const FRAME_EXT   = '.png';
 
 // --- DOM references ---
