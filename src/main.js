@@ -1,4 +1,6 @@
 import './style.css';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 
 /* ============================================
    SCROLL-DRIVEN CANVAS ANIMATION ENGINE
@@ -257,7 +259,22 @@ async function init() {
   sizeCanvas();
   preloadFrames();
 
-  window.addEventListener('scroll', onScroll, { passive: true });
+  // --- Lenis smooth scroll ---
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+  });
+
+  // Drive the canvas animation from Lenis scroll events
+  lenis.on('scroll', onScroll);
+
+  // Lenis RAF loop
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
 
   window.addEventListener('resize', () => {
     sizeCanvas();
